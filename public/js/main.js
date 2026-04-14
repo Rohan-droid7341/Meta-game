@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import { Player } from './Player.js';
 import { NetworkManager } from './NetworkManager.js';
 import { VoxelBuilder } from './VoxelBuilder.js';
+import { TypingRing } from './TypingRing.js';
 import { createSky, createClouds, loadStatue, checkPortalZones, animateWorld } from './World.js';
 
 // ─── RENDERER ────────────────────────────────────────────
@@ -62,6 +63,7 @@ const network = new NetworkManager(scene);
 const voxelBuilder = new VoxelBuilder(scene);
 let localPlayer = null;
 let portalInfos = [];
+let typingRing = null;
 
 async function init() {
   const selfData = await network.connect();
@@ -84,6 +86,9 @@ async function init() {
 
   // Local Player
   localPlayer = new Player(scene, camera, selfData.color);
+
+  // Typing Battle Ring
+  typingRing = new TypingRing(scene, localPlayer, network.socket);
 
   // Sync server snapshots
   network.onSnapshots = (snapshots) => {
@@ -113,6 +118,8 @@ function animate() {
 
     // Check portal zones
     checkPortalZones(localPlayer.mesh.position, portalInfos);
+
+    if (typingRing) typingRing.update(dt);
   }
 
   network.update();

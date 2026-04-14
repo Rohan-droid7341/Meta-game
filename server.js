@@ -11,9 +11,12 @@ import RAPIER from '@dimforge/rapier3d-compat';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+import { initTypingServer } from './typing-server.js';
+
 const app = express();
 const server = createServer(app);
 const io = new Server(server, { cors: { origin: '*' } });
+initTypingServer(io);
 app.use(express.static(join(__dirname, 'public')));
 
 const ISLAND_RADIUS = 20;

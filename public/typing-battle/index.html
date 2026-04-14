@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Battle — 2D Module</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Sidebar Leaderboard -->
+        <aside id="leaderboard">
+            <h2>Leaderboard</h2>
+            <div id="player-list">
+                <!-- Players will be injected here -->
+            </div>
+            <div id="game-status">First to 5 wins!</div>
+        </aside>
+
+        <!-- Main Gameplay Area -->
+        <main id="typing-area">
+            <div id="word-wrapper">
+                <div id="target-word"></div>
+                <div id="input-display"></div>
+                <div id="cursor"></div>
+            </div>
+            <p id="help-text">Type the word and press <kbd>Enter</kbd> to submit</p>
+        </main>
+    </div>
+
+    <!-- Win Overlay -->
+    <div id="win-overlay" class="hidden">
+        <div class="win-content">
+            <h1 id="winner-name">Player Wins!</h1>
+            <p>The battle has ended.</p>
+            <button id="back-to-lobby">Back to Lobby</button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>
